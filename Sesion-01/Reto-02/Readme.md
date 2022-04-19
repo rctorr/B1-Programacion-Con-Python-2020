@@ -1,7 +1,3 @@
- 
-
-agrega el programa que se desarrollara con backticks> [agrega la sesion con backticks] 
-	
 ## Operadores
 
 ### OBJETIVO 
@@ -14,34 +10,20 @@ agrega el programa que se desarrollara con backticks> [agrega la sesion con back
 
 #### DESARROLLO
 
-- Crea un programa que solicite 2 numeros e imprima los siguientes resultados
+- Crea el programa `operadores.py` que solicite 2 numeros e imprima los siguientes resultados
 	- Resta usando el operador -
 	- Modulo usando el operador %
+    
 - Ademas realizar el or entre un valor true y un false
-	
 
-<details>
-	#Adquiere los datos
-	print("Introduce dos numeros")
-	a = input()
-	b = input()
+Ejemplo de ejecución:
 
-	#Convierte los datos a entero
-	num1 = int(a)
-	num2 = int(b)
+```
+$ python reto_operadores.py 
+Escribe el número a: 10
+Escribe el número b: 14
 
-	#Realiza las operaciones aritméticas
-	print("La resta de los numeros es")
-	print(num1-num2)
-
-	print("El modulo de estos numeros es")
-	print(num1%num2)
-
-	#Compuerta OR
-	dato1  = True
-	dato2 = False
-	print("Operacion or de un true y un false ")
-	print(dato1 or dato2)
-</details> 
-
-
+La resta de los numeros es: -4
+El modulo de estos numeros es: 10
+Operacion or de un true y un false es: True
+```
