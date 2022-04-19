@@ -24,13 +24,11 @@ else:
 ```
 La ejecución de esta construcción es la siguiente:
 
-La condición se evalúa siempre.
+1. La condición se evalúa siempre.
+1. Si el resultado es True se ejecuta solamente el bloque de sentencias pertenecientes al if.
+1. Si el resultado es False se ejecuta solamente el bloque de sentencias 2.
 
-Si el resultado es True se ejecuta solamente el bloque de sentencias pertenecientes al if.
-
-Si el resultado es False se ejecuta solamente el bloque de sentencias 2.
-
-El archivo condicionales.py incluye algunos ejemplos del uso de if, elif y else.
+Ahora crea el archivo `condicionales.py` y agrega el siguiente código con algunos pequeños ejemplos de como usar las distintas formas del `if`:
 
 ```
 # If sirve para establecer una condición que de cumplirse ejecutará cierto código
@@ -38,7 +36,7 @@ edad  = 25
 if edad > 18:
     print ("La persona es mayor de edad")
 
-#El código dentro de else se ejecutará cuando no se cumpla la condición entablecida en el if
+# El código dentro de else se ejecutará cuando no se cumpla la condición entablecida en el if
 
 velocidad = 70
 limite = 90
@@ -59,8 +57,9 @@ elif numero > 0:
 else:
     print("El numero es negativo")
 ```
-La siguiente imagen muestra un diagrama de flujo de una estructura if else.
 
-![imagen](https://lh6.googleusercontent.com/proxy/h4HOTupkQLgcHyCcW-3RQzRNSBPoA8ntFEG9IDARFVmBK5ENE_BI9TNb8IprYvwuLc-qWcMUveEZb-FRoFnWh9RjI_oDZ3Us3H5d8s2PlifV5njS1wQQwQ=w1200-h630-p-k-no-nu)
+Resumiendo, en la siguiente imagen muestra un diagrama de flujo de cada una de las estructuras if:
+
+![if-elif-else](media/python-if.jpg)
 
 

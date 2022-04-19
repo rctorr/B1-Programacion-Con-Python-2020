@@ -18,7 +18,9 @@ Los operadores aritmeticos permiten realizar operaciones aritmeticas con datos e
 
 Los operadores lógicos trabajn con valores de verdad (True y False), y son equivalentes a las compuertas lógicas AND, OR y NOT.
 
-operadores.py muestra la forma de usar algunos operadores logicos.
+Antes de pasar a escribir nuestro programa, vamos a experimentar unos momentos usando el Intérprete de Python que a estas altura ya lo deberías de tener abierto como una ventana adicional, recuerda que para desarrollar en Python se estila tener 2 ventana de tipo Terminal, una con el Intérprete de Python ejecutando, otra para ejecutar nuestros programas y la tercera es la ventana de nuestro editor de código.
+
+Ahora si pasamos a crear el archivo `operadores.py` con el siguiénte código para comprobar el funcionamiento de ciertos operadores.
 
 ```
 operando1 = 6

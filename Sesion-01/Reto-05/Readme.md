@@ -1,4 +1,3 @@
-	
 ## Reto calculadora
 
 ### OBJETIVO 
@@ -25,45 +24,20 @@ Crea una calculadora:
 
 - Considerar división entre cero y caracteres no definidos como operaciones.
 
+Ejemplo de ejecución:
 
-<details>
-	Solución
-
-	#Se solocotan los datos
-	print("inserta el primer numero")
-	num1 = int(input())
-	print("inserta el segundo numero")
-	num2 = int(input())
-	print("Selecciona operación a realizar")
-	print("+ -> Suma")
-	print("- -> Resta")
-	print("* -> Multiplicaión")
-	print("/ -> División")
-	print("% -> Modulo")
-	operacion = input()
-
-	#Estructura de condicionales
-	if operacion == '+':
-		resultado = num1 + num2
-	elif operacion == '-':
-		resultado = num1 + num2
-	elif operacion == '*':
-		resultado = num1 + num2
-	elif operacion == '/':
-		if num2 == '0':
-			print("ERROR: División entre 0")
-			resultado = 'ERROR'
-		else:
-			resultado = num1 / num2
-	elif operacion == '%':
-		resultado = num1 % num2
-	else:
-		resultado = 'ERROR'
-		print("Operacion no definida")
-
-	#Imprime el resultado
-	print("{} {} {} = {}".format(num1,operacion, num2, resultado))
-</details> 
-
-
-
+```
+(base) $ python reto_final.py 
+inserta el primer numero
+10
+inserta el segundo numero
+13
+Selecciona operación a realizar
++ -> Suma
+- -> Resta
+* -> Multiplicaión
+/ -> División
+% -> Modulo
++
+10 + 13 = 23
+```
