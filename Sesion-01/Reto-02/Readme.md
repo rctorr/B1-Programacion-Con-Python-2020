@@ -10,20 +10,25 @@
 
 #### DESARROLLO
 
-- Crea el programa `operadores.py` que solicite 2 numeros e imprima los siguientes resultados
-	- Resta usando el operador -
-	- Modulo usando el operador %
-    
-- Ademas realizar el or entre un valor true y un false
+Crear un programa (script) llamado `volumen-esfera.py` que permita calcular el volumen de una esfera en base al radio proporcionado por el usuario, suponiendo que el radio siempre se proporciona en km, indica el volumen resultante en las unidades correspondientes.
 
-Ejemplo de ejecución:
+Por ejemplo, calcula el volumen de los siguientes astros:
+
+- Tierra cuyo radio es de 6 371 km
+- Sol con radio de 696 340 km
+
+Ejemplo de resultados:
 
 ```
-$ python reto_operadores.py 
-Escribe el número a: 10
-Escribe el número b: 14
+python volumen-esfera.py 
+Dame el radio de la esfera: 6371
 
-La resta de los numeros es: -4
-El modulo de estos numeros es: 10
-Operacion or de un true y un false es: True
+El volumen de la esfera es de 609303376068.7571 km³
+
+
+python volumen-esfera.py 
+Dame el radio de la esfera: 696340     
+
+El volumen de la esfera es de 7.955634065780704e+17 km³
+
 ```
