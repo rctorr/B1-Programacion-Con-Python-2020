@@ -1,6 +1,3 @@
-
-agrega el programa que se desarrollara con backticks> [agrega la sesion con backticks]
-
 ## Ciclos
 
 ### OBJETIVO
@@ -58,3 +55,24 @@ cantidad_datos = d3.items()
 for campo, valor in cantidad_datos:
     print("el campo {} contiene: {}".format(campo, valor))
 ```
+
+Modifica el script `libros.py` del Ejemplo-03 para que imprima la lista de libros usando un ciclo `for`, como el resultado es el mismo, estamos haciendo una refactorización.
+
+Crear el programa `numero_enteros.py` que solicite al usuario un número entero y genere la lista de todos los números enteros desde el 0 hasta el número indicado por el usuario. **Advertencia** este programa podría colapsar tu sistema operativo.
+
+```
+python numeros_enteros.py
+Dame un número entero mayor que cero: 10
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+

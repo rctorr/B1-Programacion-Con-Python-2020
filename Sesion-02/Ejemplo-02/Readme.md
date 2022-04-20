@@ -1,6 +1,3 @@
-
-agrega el programa que se desarrollara con backticks> [agrega la sesion con backticks]
-
 ## Tuplas
 
 ### OBJETIVO
@@ -55,4 +52,19 @@ O convertir a listas, las cuales si se pueden modificar
 l1 = list(t3)
 ```
 
+Modifica el script (programa) `helado.py` de la Sesion-01 para que ahora el menú de toppings sea creado con una tupla de tuplas, el resultado será el mismo pero la forma de obtenerlo será diferente, a este proceso se le conoce como **Refactorización**.
 
+Ejemplo de ejecución:
+
+```
+python helado.py 
+
+----------------------
+1. Helado con oreo
+2. Helado con m&m
+3. Helado con fresas
+4. Helado con brownie
+----------------------
+Elige el topping: 4
+El valor del helado es $28.00 M.N.
+```

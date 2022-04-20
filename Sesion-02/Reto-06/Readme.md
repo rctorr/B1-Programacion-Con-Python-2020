@@ -1,7 +1,5 @@
- 
 
-	
-## Minimo Común múltiplo
+## Funciones, ciclos y listas
 
 ### OBJETIVO 
 
@@ -17,26 +15,13 @@
 
 Realiza un programa que calcule el minimo común múltiplo utilizando el algoritmo descrito en la siguiente [página](https://www.smartick.es/blog/matematicas/recursos-didacticos/minimo-comun-multiplo-mcm/)
 
-<details>
-	Código
-	def min_com_multiplo (num1, num2):
-		divisor = 2
-		mcm = 1
-		while num1 > 1 or num2 > 1:
-			if num1 % divisor == 0:
-				num1 = num1 / divisor
-				dividido = True
-			if num2 % divisor == 0:
-				num2 = num2 / divisor
-				dividido = True
-			if dividido:
-				mcm *= divisor
-				dividido = False
-			else:
-				divisor += 1
-		return mcm
+**Nota:** A veces hay formas de obtener para las computadoras haciéndo muchos cálculos que realizando procedimientos creados para seres humanos por lo que éste problema se puede resolver de forma simple siguiendo los siguientes pasos considerando que `a` y `b` son nuestros dos números:
 
-	print(min_com_multiplo(18,91))
+1. Si a / b es división exacta, entonces la función regresa el valor de a como el mcm
+2. Si b / a es división exacta, entonces la función regresa el valor de b como el mcm
+3. Toma el valor mayor entre a y b y lo llamaremos d
+4. Ahora se incrementa el valor de d en 1
+5. Si d / a y d / b sin divisiones exactas entonces la funsión regresa el valor de d como el mcm
+6. Si no entonces repite desde el paso 4
 
-</details> 
-
+Elije la opción que sea mejor para tí!

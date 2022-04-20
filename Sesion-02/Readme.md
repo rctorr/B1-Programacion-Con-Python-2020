@@ -12,6 +12,7 @@
 
 - Listas
 	- [Ejemplo 01](Ejemplo-01)
+	- [Reto 01](Reto-01)
 
 - Tuplas
 	- [Ejemplo 02](Ejemplo-02)
@@ -32,7 +33,7 @@
 	- [Reto 06](Reto-06)
 
 - Reto Final
-	- [Reto 07](Reto-07)
+	- [Reto final](Reto-final)
 
 
 - [Postwork](Postwork)

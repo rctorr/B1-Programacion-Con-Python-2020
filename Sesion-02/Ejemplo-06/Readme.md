@@ -53,4 +53,4 @@ h = 3
 area = area_rectangulo(b, h)
 ```
 
-
+Modifica el programa `helado.py` del Ejemplo-02 para que haga uso de una función para imprimir la lista de toppings, otra función para leer la respuesta del usuario y finalmente una función más para imprimir el precio, el resultado deberá ser el mismo.

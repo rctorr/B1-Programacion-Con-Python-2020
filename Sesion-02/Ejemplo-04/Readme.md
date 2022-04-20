@@ -1,8 +1,3 @@
-
-agrega el programa que se desarrollara con backticks> [agrega la sesion con backticks]
-
-## Diccionarios
-
 ### OBJETIVO
 
 - Declarar diccionarios.
@@ -53,4 +48,16 @@ print(d3['ciudad'])
 
 #Tambien podemos extraer datos usando pop
 a = d3.pop('ciudad')
+```
+
+Modifica el programa `zodiaco.py` usando diccionarios para que el usuario escriba un signo del Zodiaco e imprima la lista de signos afines.
+
+```
+python zodiaco.py 
+Dime tu signo: Aries
+
+Tu compatibilidad es con:
+Sagitario
+Leo
+Acuario
 ```

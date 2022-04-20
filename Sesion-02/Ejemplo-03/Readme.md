@@ -1,7 +1,4 @@
-
-agrega el programa que se desarrollara con backticks> [agrega la sesion con backticks]
-
-## Tuplas
+## Conjuntos (sets)
 
 ### OBJETIVO
 
@@ -42,4 +39,16 @@ Se pueden realizar operaciones de conjuntos
 s2 = {4, 5, 6, 7, 8}
 print(s1 & s2) # Union 
 print(s1.intersection(s2))  # Interseccion
+```
+
+Modifica el script `libros.py` para que imprima la lista de libros sin repeticiones y ordenados alfabéticamente
+
+Ejemplo:
+
+```
+python Ejemplo-03/libros.py 
+El señor de los anillos
+El árte de la guerra
+La Meta
+Triptofanito
 ```
