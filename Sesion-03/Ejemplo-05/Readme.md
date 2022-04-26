@@ -1,6 +1,3 @@
-
-agrega el programa que se desarrollara con backticks> [agrega la sesion con backticks]
-
 ## Docstrings
 
 ### OBJETIVO
@@ -19,22 +16,31 @@ Los docstrings se generan entre comillas triples
 
 Para agregar ayuda general en un paquete, se hace en el archivo __init__.py
 ```
-"""Paquete de funciones sencillas"""
+""" Paquete de funciones sencillas """
 ```
 Para agregarla en un modulo, se hace en la parte superior
 Para funciones, debajo de su nombre
 ```
-#Aplicaciones extras
+# Aplicaciones extras
+
 def tabla(n):
-    #Imprime la tabla de multiplicar del numero introducido
+    """ Imprime la tabla de multiplicar del numero introducido """
     for i in range(1,11):
         print("{} x {} = {}".format(n, i, n * i))
 ```
-Para solicitar la ayuda incluida dentro del docstring usa help()
-```
 
-from matematicas import aritmetica
-help(aritmetica)
-help(aritmetica.suma)
+Modifica el archivo `helado.__init__.py` para agregar un texto de ayuda para todo el paquete, luego modifica el archivo `helado/varios.py` y agrega un texto de ayuda para todo el módulo.
+
+En IPython importa el paquete y solicita su ayuda, luego importa el módulo `varios.py` y solicita su texto de ayuda, luego importa una función de cualquier módulo y solicita la ayuda de la función:
+
+```
+import helado
+
+
+from helado import varios
+
+
+from helado.pantalla import imprime_toppings
+
 ```
 

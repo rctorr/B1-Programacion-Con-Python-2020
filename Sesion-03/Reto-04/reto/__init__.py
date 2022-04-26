@@ -1,3 +1,0 @@
-"""
-archivos de ejemplo
-"""
