@@ -1,5 +1,5 @@
  	
-## Herencia
+## Imprimiendo archivos
 
 ### OBJETIVO 
 
@@ -14,36 +14,31 @@
 2. Código de reto 3
 
 #### DESARROLLO
-Crea una clase lista de clase, con funciones que permitan leer, agregar, borrar elementos. Los elementos dentro de la lista deben ser elementos restringidos e incluye un constructor que permita introducir un número no determinado de elementos.
+Crea un script llamado `tree.py` qie imprima la lista de carpetas y archivos existentes a partir de la carpeta actual del script o de la carpeta proporcionada por el usuario en la línea de comandos.
 
-<details>
-	class Lista_de_compra:
-		def __init__(self, *args):
-			self.__lista = list()
-			for arg in args:
-				self.__lista.append(arg)
+Sugerencias:
+- Usa el módulo click para leer la carpeta inicial proporcionada por el usuario (pregunta como!)
+- Crea una clase para archivo
+- Crea una clase para carpeta que herede de archivo
+- Crea el script para una carpeta que sólo tenga archivos, luego para cuando haya una carpeta y un archivo y luego ya probar con cualquier otra carpeta.
 
+Ejemplo de ejecución:
 
-		def agrega(self, *args):
-			for arg in args:
-				self.__lista.append(arg)
-		
-		def imprime(self):
-			print("LISTA DE COMPRA")
-			for articulo in self.__lista:
-				print(articulo)
+```
+Sesion-04/Reto-05 $ python tree.py
+Readme.md
 
-		def borra(self, *args):
-			for arg in args:
-				self.__lista.remove(arg)
-
-
-
-	supermercado = Lista_de_compra('Jamon', 'Queso', 'Pan')
-	supermercado.agrega('leche', 'huevo')
-	supermercado.borra('Queso')
-	supermercado.imprime()
-
-</details> 
-
+Sesion-04 $ python tree.py
+Ejemplo-01/
+Ejemplo-02/
+Ejemplo-03/
+Ejemplo-04/
+Postwork/
+Reto-01/
+Reto-02/
+Reto-03/
+Reto-04/
+Reto-05/
+Readme.md
+```
 

@@ -1,6 +1,3 @@
-
-agrega el programa que se desarrollara con backticks> [agrega la sesion con backticks]
-
 ## Metodos
 
 ### OBJETIVO
@@ -32,8 +29,6 @@ Como las funciones, los metodos pueden tener parametros (ver asignar_nombre) o r
 
 La palabra self, apunta a los atributos y métodos de la clase. Es importante incluirla en la definición de los métodos.
 
-```
-
 Todas las clases en Python 3 cuentan con ciertos métodos integrados, que sirven de apoyo y mejor uso de los objetos. Algunas importantes son:
 
 - __init__ - Llamada al crear un objeto, se le conoce como constructor o inicializador.
@@ -58,15 +53,14 @@ objeto = MiClase()
 #Llama a _str__
 print(objeto)
 
-#__del__ se llama automaticamente cuando el objeto ya no se utilizará, en este caso al final del programa
-
-
+#__del__ se llama automaticamente cuando el objeto ya no se utilizará al final del programa o cuando se elimina con la función del()
+del(objeto)
 ```
 
 Usualmente en el constructor se obtienen parametros de la clase, a diferencia de otros lenguajes de programación en Python no se pueden incluir múltiples constructores, pero si se usan parametros nombrados, se pueden poner valores por default.
 
-Se muestra un ejemplo en constructores.py
 ```
+
 #Ejemplo de clase con constructor y __str__
 class Mascota:
     def __init__(self,especie = 'animal' , edad = 0):
@@ -83,6 +77,3 @@ print(rufo)
 bicho = Mascota(edad=2)
 print(bicho)
 ```
-
-
-
