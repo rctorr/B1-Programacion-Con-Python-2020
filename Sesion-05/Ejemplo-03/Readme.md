@@ -1,5 +1,3 @@
-
-
 ## Manejo de errores y excepciones 
 
 ### OBJETIVO
