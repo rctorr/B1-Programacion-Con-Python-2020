@@ -9,7 +9,7 @@
 
 1. Python 3
 
-#### DESARROLLO
+#### PREWORK 
 JSON (JavaScript Object Notation), es un formato basado en texto, utilizado para transmitir y almacenar información estruturada. Es muy utilizado en diversas herramientas web. Guarda cierta similitud con los tipos de datos de Python.
 
 ![Equivalencias](./elementos.png)
@@ -58,6 +58,8 @@ In [11]: with open("ejemplo-2.json", "w") as arch_txt:
 In [12]: 
 ```
 
+#### DESARROLLO
+
 Crea un script `csvtojson.py` que dado un nombre de archivo en formato csv lo convierta a un archivo json de la forma:
 
 ```
@@ -81,10 +83,13 @@ Crea un script `csvtojson.py` que dado un nombre de archivo en formato csv lo co
 ```
 Es requisito que el archivo de entrada incluya una primera fila con los nombres de las columnas y el nombre del archivo de salida deberá ser el mismo que el de entrada cambiando sólo la extensión a `.json`.
 
+Ejemplo de ejecución:
+
 ```
-$ python csvtojson.py datos.csv
-Se creó satisfactoriamente el archivo datos.json
+$ python csvtojson.py ejemplo.csv
+Se creó satisfactoriamente el archivo ejemplo.json
 
 $ ls
-datos.csv    datos.json
+ejemplo.csv    ejemplo.json	readme.md
 ```
+

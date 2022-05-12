@@ -128,3 +128,52 @@ with open("arch2.txt", 'r') as archivo:
     print(archivo.readline()) 
     print(archivo.readlines())  
 ```
+
+### Desarrollo
+
+Crea el script `tree.py` con los siguientes requerimientos:
+
+1. Que reciba como parámetro en la línea de comandos el nombre de una carpeta,
+si no se indica ninguna se asume la carpeta actual.
+2. Imprima la lista de todas las carpetas y archivos de forma recursiva en la 
+salida estándar en formato de texto
+3. Hacer uso de una clase llamada `Archivo` y si es necesario una clase
+adicional llamada `Carpeta`.
+4. Hacer uso del módulo `click` para manejar los argumentos en la línea de
+comandos.
+5. Agregar la opción `--txt nombre.txt` para guardar el resultado en el archivo `nombre.txt`, aunque esto también lo podrías realizar usando el concepto de
+**redireccionando la salida estándar**.
+
+Ejemplo de ejecución:
+
+```
+Sesion-06/Ejemplo-01 $ python tree.py ../
+Ejemplo-01/
+Ejemplo-01/readme
+Ejemplo-01/tree.py
+Ejemplo-02/
+Ejemplo-02/readme
+Ejemplo-03/
+Ejemplo-03/readme
+Ejemplo-04/
+Ejemplo-04/readme
+Ejemplo-Extra/
+Ejemplo-Extra/admin.py
+Ejemplo-Extra/productos.json
+Ejemplo-Extra/readme.md
+Postwork/
+Postwork/readme.md
+Reto-01/
+Reto-01/readme.md
+Reto-02/
+Reto-02/readme.md
+Reto-03/
+Reto-03/readme.md
+Reto-04/
+Reto-04/readme.md
+Reto-final/
+Reto-final/readme.md
+readme.md
+Sesion-06/Ejemplo-01 $  
+```
+

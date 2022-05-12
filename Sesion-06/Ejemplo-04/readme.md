@@ -10,7 +10,7 @@
 
 1. Python 3
 
-#### DESARROLLO
+#### POSTWORK 
 Un script puede invocarse desde la terminal sin la necesidad de tener abierto anteriormente el interprete de Python, para esto usamos la siguiente estructura:
 ```
 $python script.py
@@ -88,7 +88,9 @@ python argumentos_nombre.py -f readme.md
 El nombre de archivo a procesar es:  readme.md
 ```
 
+#### DESARROLLO
 
+Los ejemplos realizados duranete los ejemplos anteriores haciendo uso del módulo `click`.
 
 
 

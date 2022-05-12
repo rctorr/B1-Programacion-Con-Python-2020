@@ -10,7 +10,7 @@
 
 1. Python 3
 
-#### DESARROLLO
+#### PREWORK
 Los archivos csv (comma separated values), son un formato de archivos conformados por valores separados por una coma, como si fueran un tabla, son muy usados para almacenar sets de datos.
 
 Existen variantes que usan otro carcter para separar los valores, como lo son los tsv(tab separatted values), que usa tabuladores para separar los valores. Estos últimos suelen utilizarse para almacener corpus de oraciones para análisis de lenguaje natural.
@@ -70,5 +70,21 @@ In [13]: with open("ejemplo.csv", "w", newline="") as arch_txt:
 In [14]: 
 ```
 
-Ahora modifica el programa `tree.py` de la sesión anterior y agrega la opción `--csv` que permita exportar la información en formato CSV en el archivo `salida.csv`. Comprueba el contenido del archivos CSV abriendo el archivo en el editor de código o en una hoja de cálculo.
+#### DESARROLLO
+
+Ahora modifica el programa `tree.py` de la sesión anterior con los siguiente requerimientos:
+
+1. Agrega la opción `--csv nombre.csv` que permita exportar la información en formato CSV en el archivo `nombre.csv`.
+2. Revisa el concepto de segmentar tu programa usando el paradigman de
+programación MVC (Nodel View Controler) y crea una función para manejar la
+salida en el forma indicado.
+3. Comprueba el contenido del archivo CSV abriendolo en el editor de código o en una hoja de cálculo.
+
+Ejemplo de ejecución:
+
+```
+Sesion-06/Ejemplo-02 $ python tree.py --csv salida.csv ../
+Se ha creado el archivo salida.csv con los resultados.
+Sesion-06/Ejemplo-02 $ 
+```
 
