@@ -20,42 +20,55 @@ Funcionan de manera similar a los archivos, con conversión del archivo a listas
 
 La forma de utilizarla, conserva ciertas similitudes con el acceso a otros tipos de archivos
 
-`archivo_csv.py`
 ```
-import csv 
-# Escribir archivo
-with open("ejemplo.csv", 'w') as fcsv: 
-    writer = csv.writer(fcsv) 
-    writer.writerow(["Nombre", "Apellido", "Genero"]) #Los archivos csv se estructuran en filas
-    writer.writerow(["Maria", "Alvarado", "F"]) 
-    writer.writerow(["Felipe", "Coutiño", "M"]) 
+In [1]: import csv
 
-# Leer archivo csv iterando filas
-with open("ejemplo.csv", 'r') as fcsv: 
-    reader = csv.reader(fcsv) 
-    for row in reader: 
-        print(row) # Tipo lista
+In [2]: arch_txt = open("ejemplo.csv")
+
+In [3]: lector_csv = csv.reader(arch_txt)
+
+In [4]: lineas = list( lector_csv )
+
+In [5]: lineas
+Out[5]: 
+[['Hugo', 'Mc Pato', 'Macho'],
+ ['Paco', 'Mc Pato', 'Macho'],
+ ['Daisy', 'Mc Pato', 'Hembra']]
+
+In [6]: arch_txt.close()
+
+In [7]: lineas
+Out[7]: 
+[['Hugo', 'Mc Pato', 'Macho'],
+ ['Paco', 'Mc Pato', 'Macho'],
+ ['Daisy', 'Mc Pato', 'Hembra']]
+
+In [8]: lineas.append( ["Pluto", "Mc Rey", "Macho"] )
+
+In [9]: lineas
+Out[9]: 
+[['Hugo', 'Mc Pato', 'Macho'],
+ ['Paco', 'Mc Pato', 'Macho'],
+ ['Daisy', 'Mc Pato', 'Hembra'],
+ ['Pluto', 'Mc Rey', 'Macho']]
+
+In [10]: arch_txt = open("ejemplo.csv", "w")
+
+In [11]: arch_txt.close()
+
+In [12]: with open("ejemplo.csv", "w", newline="") as arch_txt:
+    ...:     escritor_csv = csv.writer(arch_txt)
+    ...:     escritor_csv.writerows( lineas )
+    ...: 
+
+In [13]: with open("ejemplo.csv", "w", newline="") as arch_txt:
+    ...:     escritor_csv = csv.writer(arch_txt)
+    ...:     escritor_csv.writerow( ["Nombre", "Apellido", "Género"] )
+    ...:     escritor_csv.writerows( lineas )
+    ...: 
+
+In [14]: 
 ```
 
-Aunque por defecto el CSV se maneja como listas, es posible que también se maneje como diccionarios, si la primera línea del CSV corresponde. Es posible también elegir el nombre de sus columnas
-
-`archivo_csv_dict.py`
-
-```
-import csv
-
-#Se puede usar with también con .csv
-#Se pueden usar diccionarios como argumentos para writerow
-with open("ejemplod.csv", 'w') as fcsv: 
-    fields = ("Nombre", "Apellido", "Edad") 
-    writer = csv.DictWriter(fcsv, fieldnames=fields)
-    writer.writeheader() 
-    writer.writerow({'Nombre': 'Ted', 'Apellido': 'Mosby', 'Edad': 30}) 
-    writer.writerow({'Nombre': 'Marshall', 'Apellido': 'Ericksen', 'Edad': 29}) 
-
-with open("ejemplod.csv", 'r') as fcsv: 
-    reader = csv.DictReader(fcsv) 
-    for row in reader: 
-        print(row['Nombre'], row['Apellido'])
-```
+Ahora modifica el programa `tree.py` de la sesión anterior y agrega la opción `--csv` que permita exportar la información en formato CSV en el archivo `salida.csv`. Comprueba el contenido del archivos CSV abriendo el archivo en el editor de código o en una hoja de cálculo.
 

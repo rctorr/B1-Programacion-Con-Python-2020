@@ -10,63 +10,81 @@
 1. Python 3
 
 #### DESARROLLO
-JSON (JavaScript Object Notation), es un formato basado en texto, utilizado para transmitir y almacenar información estruturada. Es muy utilizado en diversas herramientas web. Guarda cierta similitud con los diccionarios de Python.
+JSON (JavaScript Object Notation), es un formato basado en texto, utilizado para transmitir y almacenar información estruturada. Es muy utilizado en diversas herramientas web. Guarda cierta similitud con los tipos de datos de Python.
 
-
-`usa_json.py`
-```
-import json
-
-#En python los diccionarios pueden convertirse a json y viceversa
-
-mi_dic = {"nombre": "Armando", "apellido": "Armada", "lista": [1,2,3,4]}
-
- # Conviertelo a string en formato JSON
-mi_js = json.dumps(mi_dic) 
-print(mi_js)
-
-#Convertir un json a diccionario
-mi_json = """{"nombre": "Caballero", "apellido": "Caballo", "lista": [5,6,7,8]}"""
-json.loads(mi_json) # De string JSON a diccionario
-
-mi_json = """{"nombre": "Caballero", "apellido": "Caballo", "lista": [5,6,7,8]}""" 
-
-dic = json.loads(mi_json) # De string JSON a diccionario
-print(dic)
-
-print(dic['nombre'])
-```
-
-### Elementos similares en JSON y diccionarios
-
-Los elementos de un diccionario de Python, son convertidos al tipo de dato mas cercano en JavaScript, y viceversa.
-
-[Equivalencias](./elementos.png)
+![Equivalencias](./elementos.png)
 
 ### Archivos JSON
 
-La 's' en los comandos de json (load**s** y dump**s**), indican que se trata de un string. También podemos manejar archivos mediante *load* y *dumps*
+La 's' en los comandos de json (load**s** y dump**s**), indican que se trata de un string. También podemos manejar archivos mediante *load* y *dump*
 
-`archivos_json.py`
 ```
-import json 
-from datetime import datetime
+n [5]: import json
 
-#Se pueden convertir diccionarios a json y guardarlos en archivos .json
+In [6]: with open("ejemplo.json") as arch_txt:
+   ...:     datos = json.load(arch_txt)
+   ...: 
 
-with open("ejemplo.json", "w") as fjson: # Guardarlo como archivo
-   mi_dicc = {"nombre": "diccionario", "year": 2019} 
-   json.dump(mi_dicc, fjson, indent=4)  
+In [7]: datos
+Out[7]: 
+[{'id': 1, 'nombre': 'Hugo Mc Pato', 'edad': 5, 'genero': 'Pato'},
+ {'id': 2, 'nombre': 'Paco Mc Pato', 'edad': 3, 'genero': 'Pato'},
+ {'id': 3, 'nombre': 'Daisy Mc Pato', 'genero': 'Pata'}]
 
+In [8]: datos.append(
+   ...:     {
+   ...:         "id": 4,
+   ...:         "nombre": "Luis Mc Pato",
+   ...:         "edad": 7,
+   ...:         "genero": "Pato"
+   ...:     }
+   ...: )
 
-with open("ejemplo2.json", "w") as fjson: 
-    mi_dicc = {"fecha": datetime.now().strftime("%c")} # Las fechas necesitan convertirse 
-    json.dump(mi_dicc, fjson, indent=4)  # Puede agregarse indentación
+In [9]: datos
+Out[9]: 
+[{'id': 1, 'nombre': 'Hugo Mc Pato', 'edad': 5, 'genero': 'Pato'},
+ {'id': 2, 'nombre': 'Paco Mc Pato', 'edad': 3, 'genero': 'Pato'},
+ {'id': 3, 'nombre': 'Daisy Mc Pato', 'genero': 'Pata'},
+ {'id': 4, 'nombre': 'Luis Mc Pato', 'edad': 7, 'genero': 'Pato'}]
 
-with open("ejemplo2.json", 'r') as fjson: 
-    mi_json = json.load(fjson) 
-    print(mi_json) 
-                                                                                                                                                        
-{'fecha': 'Fri Aug  2 00:25:46 2019'}
+In [10]: with open("ejemplo-2.json", "w") as arch_txt:
+    ...:     json.dump(datos, arch_txt)
+    ...: 
 
+In [11]: with open("ejemplo-2.json", "w") as arch_txt:
+    ...:     json.dump(datos, arch_txt, indent=4)
+    ...: 
+
+In [12]: 
+```
+
+Crea un script `csvtojson.py` que dado un nombre de archivo en formato csv lo convierta a un archivo json de la forma:
+
+```
+[
+    { /* Registro 1 */
+        "campo1":valor campo 1,
+        "campo2":valor campo 2,
+        "campo3":valor campo 3,
+        ...
+        "campoN":valor campo N
+    },
+    { /* Registro 2 */
+        "campo1":valor campo 1,
+        "campo2":valor campo 2,
+        "campo3":valor campo 3,
+        ...
+        "campoN":valor campo N
+    },
+    ...
+]
+```
+Es requisito que el archivo de entrada incluya una primera fila con los nombres de las columnas y el nombre del archivo de salida deberá ser el mismo que el de entrada cambiando sólo la extensión a `.json`.
+
+```
+$ python csvtojson.py datos.csv
+Se creó satisfactoriamente el archivo datos.json
+
+$ ls
+datos.csv    datos.json
 ```

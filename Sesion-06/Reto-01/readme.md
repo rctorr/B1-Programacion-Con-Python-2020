@@ -1,4 +1,4 @@
-## Argumentos en scripts
+## Archivos de text plano
 
 ### OBJETIVO
 
@@ -10,46 +10,21 @@
 
 #### DESARROLLO
 
-
-Pedir al usuario una lista, con nombre un nombre de auto, color, nivel de equipamiento(bajo, medio,alto) y precio. Guardar la información en un archivo llamado autos.txt, separado por tabulador. Anexar al final la información si ya existe el archivo.
+Crea el programa `autos.py` que pida al usuario una lista, con nombre de auto, color, nivel de equipamiento(bajo, medio,alto) y precio. Adicionar la información al archivo llamado `autos.txt`, con formato texto plano cada vez que el programa sea ejecutado.
 
 ```
+python auto.py
 Inserte nombre del auto: Rio
 Inserte color: rojo
 inserte nivel de equipo:medio
 Inserte precio: 210 000
-Agregar otro carro (s/N)? s
+La informacion del auto ha sido agregrada al archivo autos.txt
 
+python auto.py
 Inserte nombre del auto: swift
 Inserte color: amarillo
 inserte nivel de equipo:bajo
 Inserte precio: 11111
-Agregar otro carro (s/N)? N
+La informacion del auto ha sido agregrada al archivo autos.txt
 ```
 Para concatenar a un archivo, puedes usar el tipo de acceso 'a' (append)
-
-<details>
-    continuar  = True
-
-    while continuar:
-        nombre = input("Inserte nombre del auto: ")
-        color = input("Inserte color: ")
-        equipo = input("inserte nivel de equipo:")
-        precio = input("Inserte precio: ")
-        with open("autos.txt", 'a') as autos_file:
-            autos_file.write("{}\t{}\t{}\t{}\n".format(nombre, color, equipo,precio))
-        valid = False
-        while not valid:
-            c = input("Agregar otro carro (s/N)? ")
-            c = c.lower()
-            if c.startswith('s'):
-                continuar = True
-                valid = True
-            elif c.startswith('n'):
-                continuar = False
-                valid = True
-            else:
-                print("Respuesta no válida")
-                valid = False
-        print("")
-</details> 

@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "nombre": "Laptop",
+        "cantidad": 3,
+        "precio": 120000.0
+    },
+    {
+        "id": 2,
+        "nombre": "PC",
+        "cantidad": 2,
+        "precio": 10000.0
+    }
+]
