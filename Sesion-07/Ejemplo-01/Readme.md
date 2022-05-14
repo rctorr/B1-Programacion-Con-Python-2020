@@ -3,8 +3,8 @@
 
 ### OBJETIVO
 
-- Crear una página utilizando Flask
-- Mostrar templates 
+- Crear una lplicación web utizando Flask
+- Mostrar páginas de la aplicación por medio de plantillas (templates)
 
 #### REQUISITOS
 
@@ -20,27 +20,75 @@ Para utilizar flask es necesario instalarlo e importarlo, no está disponible de
 ```
 pip installl flask
 ```
-Para especificar la ruta que se ejecutara desde una dirección es necesario aplicar un decorador @app.route(ruta).
+
+Vamos a crear una aplicación web que consiste en dos página, la página de **Inicio** y la página de **Acerca de** como se muestra a continuación.
+
+![Página de inicio](media/pagina-inicio.png)
+
+![Página de Acerca de](media/pagina-acerca-de.png)
+
+Se puede ver las páginas ya maketadas desde la carpeta `public_html/` el diseñador y maketador ya hicieron su chamba.
+
+Nota que para navegar entre una u otra página se hace uso de una URL, mejor aún abre una Terminal (Anaconda Prompt en windows) y cambiate a la carpeta `public_html` del `Ejemplo-01` de la `Sesion-07`, ahora ejecuta el siguiente comando:
+
+```
+(base) Sesion-07/Ejemplo-01 $ python -m http.server
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+```
+
+Ésto inicia un mini servidor web y podrás acceder a la página web como si de un servidor real se tratara, abre en tu navegador la dirección `http://localhost:8000` y observa el resultado.
+
+Ahora observa que para cambiar entre una página y otra tenemos dos URL's
+
+- URL para la página de inicio: `http://localhost:8000/`
+- URL para la página de acerca de: `http://localhost:8000/acerca-de.html`
+
+Nota que para la página de inicio también se puede acceder por medio de la URL `http://192.168.1.66:8000/index.html`, esto significa que toda página web cuanta con una página principal, inicio, home o raíz y en el área de páginas web se conoce como **diagonal** o index.html o index.php o index.pl o etc.
+
+Cuando hablamos de aplicaciones web, éstas URL's dejan de indicar directamente archivos y sólo se vuelven etiquetas para nombrar a cada una de las páginas de nuestra aplicación web iniciando por la página principal o página raíz:
+
+```
+/          <- página principa, raíz, inicio o home
+/acerca-de <- página con el contenido de acerca de
+/contacto  <- página con la información de contacto
+/productos <- página con la lista de productos
+...
+```
+En el área de desarrollo de aplicaciones web a estar direcciones o links o URL's ser les conoce como **rutas** y toca a nosotros definirlas.
+
+En una aplicación web una ruta ya no se asocia directamente con un archivo html, en su lugar se asocia con una función normalmente llamada similarmente al nombre de la ruta, por ejemplo:
+
+```
+/          <- inicio()
+/acerca-de <- acerca_de() 
+/contacto  <- contacto() 
+/productos <- productos() 
+...
+```
+
+Cada una de estas funciones será la encargada de generar el código HTML para la ruta o página indicada por la ruta o URL y para ello en Flask se aplica un decorador @app.route(ruta) a cada función.
 
 El siguiente código muestra como crear una página que imprime "Hola Mundo", debido a que index se encuentra decorado con '/', la entrada será directa
 
+
+Crea el script `hola-flask.py` con el siguiente código:
 ```
 from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
 def index():
-    return "Hola Mundo!"
+    return "¡Hola mundo!"
 
 if __name__ == "__main__":
-    app.run(debug=True)% Permite ver opciones de depuración en caso de errores
+    app.run(debug=True)
 ```
 
-Al ejecutarse este programa muestra en la terminal:
+Y ejecutamos est programa muestra en la terminal:
+
 ```
- python flask3.py 
- * Serving Flask app "flask3" (lazy loading)
+(base) Sesion-07/Ejemplo-01 $ python hola-flask.py
+ * Serving Flask app "hola-flask" (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
@@ -49,47 +97,23 @@ Al ejecutarse este programa muestra en la terminal:
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 291-567-355
-127.0.0.1 - - [26/May/2020 15:29:54] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:31:27] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:31:36] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:31:36] "GET /static/css/main.css HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:33:48] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:33:48] "GET /static/css/main.css HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:34:22] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:34:22] "GET /static/css/main.css HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:34:22] "GET / HTTP/1.1" 200 -
-127.0.0.1 - - [26/May/2020 15:34:23] "GET /static/css/main.css HTTP/1.1" 304 -
 ```
+
 En el cual nos indica que para ver la página en ejecución debemos ir a: http://127.0.0.1:5000/  en un navegador.
 
-Si en lugar de querer ver un texto en la página queremos mostrar un template .html podemos retornar render_template como en el siguiente ejemplo.
+Si en lugar de ver sólo un texto simple queremos ver una página entonces abre el contenido del archivo `public_html/index.html` y pégalo como resultado de la función `index()` y observa el resultado.
+
+Generar el código HTML de forma directa no es lo ideal, si no que hacemos uso del sistema de plantillas (templates) que proporcionan los distintos framewroks, en éste caso Flask, así que anora vamos a hacer que la ruta `/acerca-de` muestre el contenido del archivo `public_html/acerca-de.html`, agrega el siguiente código a tu script:
+
 ```
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('pagina.html')
-
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/acerca-de')
+def acerca_de():
+    return render_template('acerca-de.html')
 
 ```
 
-En este caso el código de pagina.html es sencillo.
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+Recuerda que por default flask busca que el archivo acerca-de.html en la carpeta `templates/`.
 
-</head>
-<body>
-    Hola Bedu 222
-</body>
-</html>
-```
-Recuerda que por default flask busca que el archivo .html se encuentre en la carpeta templates
+Ahora navega entre las distintas páginas de tu primera aplicación web.
 
 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>{% block titulo %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/panel">Panel</a>
+    </nav>
+    {% block contenido %}
+    {% endblock %}
+    <footer>
+        &copy; Todos los derechos reservador por <span class="marca">AdminProd</span> |
+        Página hecha con &lt;3 en México
+    </footer>
+</body>
+</html>

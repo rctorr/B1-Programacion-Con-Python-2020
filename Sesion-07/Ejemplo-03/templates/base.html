@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>{% block titulo %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <nav>
+        <span class="marca">Mi App</span>
+        <a href="/">Inicio</a>
+        <a href="/acerca-de">Acerca de</a>
+        <a href="/contacto">Contacto</a>
+    </nav>
+    {% block contenido %}
+    {% endblock %}
+    <footer>Página hecha con &lt;3 en México</footer>
+</body>
+</html>

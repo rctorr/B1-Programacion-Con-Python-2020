@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block titulo %} {{ titulo }} {% endblock %}
+
+{% block contenido %}
+<form method="POST">
+    <p>
+      <label>Nombre:</label>
+      <input type=text name="nombre" required />
+    </p>
+    <p>
+      <label>E-mail</label>
+      <input type="email" name="email" required />
+    </p>
+    <p>
+      <label>Comentario</label>
+      <textarea name="comentarios" required></textarea>
+    </p>
+    <p class="botones">
+        <button type="submit">Enviar</button>
+    </p>
+</form>
+{% endblock %}

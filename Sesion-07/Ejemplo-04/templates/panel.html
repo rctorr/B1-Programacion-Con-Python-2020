@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block titulo %} {{ titulo }} {% endblock %}
+
+{% block contenido %}
+<div class="contenido">
+    {% if msg %}
+    <section class="tarjeta-msg">
+        {{ msg }}
+    </section>
+    {% endif %}
+    <section class="tarjeta-titulo">
+        Lista de opciones del panel de administración de productos
+    </section>
+    <section class="tarjeta tarjeta-menu">
+        <aside class="opcion">
+            <a href="/producto/alta/">&#x271A; Alta de producto</a>
+        </aside>
+        <aside class="opcion">
+            <a href="/productos/">&#x2716; Baja de producto</a>
+        </aside>
+        <aside class="opcion">
+            <a href="/productos/">&#x270E; Modificar producto</a>
+        </aside>
+    </section>
+</div>
+
+{% endblock %}

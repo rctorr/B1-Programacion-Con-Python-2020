@@ -1,10 +1,10 @@
 
-## Titulo del Ejemplo
+## Rutas y parámetros
 
 ### OBJETIVO
 
-- Incluir Jinja en nuestras plantillas
-- Incluir estilos en nuestras páginas web usando archivos css
+- Crear páginas con múltiples rutas
+- Incluir argumentos en las rutas
 
 #### REQUISITOS
 
@@ -13,76 +13,26 @@
 
 #### DESARROLLO
 
-Jinja 2 es un motor de plantillas para Python, lo que significa que le permite al desarrollador producir páginas web, que contienen, por ejemplo, código html base y marcadores de posición para que Jinja 2 los llene. Basado en el sistema de plantillas de Django, Jinja es uno de los más utilizados, ya que permite a los desarrolladores usar conceptos poderosos como sandboxing y herencia para permitir que una plantilla se reutilice fácilmente.
- 
-Jinja nos permite usar bloques con la siguiente forma, y expandirlo desde otro archivo.
-```
-{% block body %} {% endblock %}
-```
-```
-{% block body %} 
-<h1>
-    PARTE 2
-</h1>
-{% endblock %}
-```
+**PARÁMETROS**
 
-En el ejemplo de esta carpeta puedes ver como el archivo extender.html inserta dentro de pagina.html usando jinja
+Además de tener múltiples rutas es posible crear páginas que acepten argumentos por medio de la URL, por ejmplo:
 
-Otro tipo de bloques jinja es el delimitado por {{ }}, los cuales nos permiten insertar código dentro de los html
+- http://127.0.0.01:5000/hola/pluto/
 
-```
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css')}}">
+Genera la página que dirá:
+
+`Hola Pluto como estás!`
+
+- http://127.0.0.01:5000/hola/rctorr/
+
+Genera la página que dirá:
+
+`Hola Rctorr como estás!`
+
+Para eso al momento de crear una ruta se define una variable y el tipo de dato que uno espera, vamos a agregar el siguiente código a programa de `mi-app.py`
 
 ```
-archivo pagina.html
+@app.route('/hola/<str:nombre>/')
+def hola(nombre):
+    return f"<h1>Hola {nombre} como estás!</h1>"
 ```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css')}}">
-    {% block head %} {% endblock %}
-
-</head>
-<body>
-
-    {% block body %} {% endblock %}
-</body>
-</html>
-```
-
-extender.html
-
-```
-{% extends 'pagina.html' %}
-{% block head %}
-
-{% endblock %}
-
-{% block body %} 
-<h1>
-    PARTE 2
-</h1>
-{% endblock %}
-```
-
-
-Los archivos css (hojas de estilos en cascada) nos permiten incluir plantillas de estilos  para definir y crear la presentación de un documento estructurado escrito en html.
-
-Coloca los archivos css en la carpeta static y no olvides linkearlos a la página.
-
-Ejemplo de archivo css
-```
-body{
-    margin:0;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color:green;
-    
-}
-```
-Si ejecutas flask3.py en un navegador verás que la hoja de estilos habrá modificado el color y fuente del texto en el body.
-
-
-
-

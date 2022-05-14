@@ -1,10 +1,9 @@
 
-## Titulo del Ejemplo
+## Formularios
 
 ### OBJETIVO
 
-- Crear páginas con múltiples rutas
-- Incluir argumentos en las rutas
+- Crear páginas con formularios usando Flask
 
 #### REQUISITOS
 
@@ -13,57 +12,35 @@
 
 #### DESARROLLO
 
-Al usar flask es posible crear páginas con varias rutas con comportamiento independiente, para esto utilizaremos el decorador @app.route sobre distintos métodos
+Cuando una página contiene un formulario, éste se muestra como cualquier otra página y se usa el método o acción de tipo `GET`, éste es el método que usa un navegador cuando cuando solicita cualquier página, mientras no se indique un método diferente.
 
-Por ejemplo en el siguiente fragmento de código existen dos rutas.
-```
-@app.route('/')
-def index():
-    return render_template('extender.html')
+Entonces, nuevamente, la página de un formulario se solicita usando el método `GET` y en el navegador aparecerán los campos a llenar y generalmente un botón.
 
-@app.route('/nombre')
-def nombre():
-    return "Luis"
-```
-Si esto se ejecuta en un servidor local, al entrar en la ruta http://127.0.0.1:5000/ entraremos a la página correspondiente a la plantilla extender.html, en caso contrario al entrar a http://127.0.0.1:5000/nombre ,  en el navegador se verá una página en blanco con la palabra Luis.
+Cuando uno termina de llenar un formulario uno preciona normalmente el botón de **Enviar** entonces el navegador genera una petición al servidor, pero esta vez incluye los datos capturados y además el método ahora es **POST**.
 
-Además de tener múltiples rutas es posible crear páginas que acepten argumentos por medio de la URL, para esto podemos utilizar el método request-
+En Flask para indicar que métodos son permitidos por una ruta, se realiza con el decorador `route()` como se muestra en el código más adelante.
 
-```
+Adicionalmente se tiene que hacer uso de un objeto de Flask llamado `request` (petición) que es una variable que almacena los datos capturador por el formulario, el método usado y otras muchas variables más, pero usando esta variable para obtener los datos del formulario se realiza con:
 
-@app.route('/saluda')
-def saluda():
-    nombre = request.args.get('nombre', 'humano')
-    return "Hola {}".format(nombre)
+`request.form["name del campo"]`
+
+Entonces es necesario agregar una nueva ruta y función a nuestra `mi-app.py` para que pueda atender las peticiones de la página de Contacto, notar que también se necesita del archivo `templates/contacto.html` que contiene el código HTML correspondiente.
+
 
 ```
-Al cual hay que pasarle como atributos el nombre del argumento y un valor por defecto. Por ejemplo con el código anterior al entrar a las siguientes direcciones estos son los resultados.
+@app.route('/contacto/', methods = ['GET', 'POST'])
+def contacto():
+    titulo = "Página de Contacto"
+    if request.method == 'POST':
+        nombre = request.form["nombre"]
+        email = request.form["email"]
+        comentarios = request.form["comentarios"]
+        
+        print("Los datos recibidos del formulario son:")
+        print(f"Nombre: {nombre}")
+        print(f"E-mail: {email}")
+        print(f"Comentarios: {comentarios}")
+        return index()
 
-- http://127.0.0.1:5000/saluda -> Hola humano
-- http://127.0.0.1:5000/saluda?nombre=Pablo -> Hola Pablo
-- http://127.0.0.1:5000/saluda?nombre=Juan -> Hola Juan
-
-El código completo del ejemplo es el siguiente
-```
-from flask import Flask, render_template, url_for
-from flask import request
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('extender.html')
-
-@app.route('/nombre')
-def nombre():
-    return "Luis"
-
-@app.route('/saluda')
-def saluda():
-    nombre = request.args.get('nombre', 'humano')
-    return "Hola {}".format(nombre)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    return render_template('contacto.html', titulo = titulo)
 ```

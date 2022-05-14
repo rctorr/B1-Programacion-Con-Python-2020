@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block titulo %} {{ titulo }} {% endblock %}
+
+{% block contenido %}
+<div class="contenido">
+    <section class="tarjeta-titulo">
+        Modificar de producto
+    </section>
+    <section class="tarjeta">
+        <form class="producto" method="POST">
+            <p>
+              <label>Nombre:</label>
+              <input type=text name="nombre" value="{{ producto.nombre }}" required />
+            </p>
+            <p>
+              <label>Precio</label>
+              <input type="number" name="precio" value="{{ producto.precio }}" required />
+            </p>
+            <p>
+              <label>Descriopción</label>
+              <textarea name="descripcion" required>{{ producto.descripcion }}</textarea>
+            </p>
+            <p class="botones">
+                <button type="submit">Guardar</button>
+            </p>
+        </form>        
+    </section>
+</div>
+
+{% endblock %}

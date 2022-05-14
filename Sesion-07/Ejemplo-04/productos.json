@@ -1,0 +1,20 @@
+[
+    {
+        "id": 0,
+        "nombre": "Impresora",
+        "precio": "1550.0",
+        "descripcion": "Impresora marca HP LaserJet para un volumen de impresi\u00f3n de 10000 p\u00e1ginas por mes."
+    },
+    {
+        "id": 1,
+        "nombre": "Escritorio",
+        "precio": "3500.0",
+        "descripcion": "Escritorio de metal y cristal para acomodar una PC y espacio para libros."
+    },
+    {
+        "id": 2,
+        "nombre": "Toner",
+        "precio": "1200.0",
+        "descripcion": "Toner para impresora HP LaserJet"
+    }
+]

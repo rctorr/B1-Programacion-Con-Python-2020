@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block titulo %} {{ titulo }} {% endblock %}
+
+{% block contenido %}
+<div class="contenido">
+    <section class="tarjeta-titulo">
+        Lista productos existentes
+    </section>
+    {% for producto in productos %}
+    <section class="tarjeta">
+        <aside>
+          <span class="etiqueta">Producto:</span>
+          {{ producto.nombre }}
+        </aside>
+        <aside>
+          <span class="etiqueta">Precio oferta:</span>
+          $ {{ producto.precio }}
+        </aside>
+        <aside>
+          <span class="etiqueta">Descripción:</span>
+          {{ producto.descripcion }}
+        </aside>
+        <aside class="botones">
+            <a class="btn" href="/producto/modificar/{{producto.id}}/">
+              &#x270E; Modificar
+            </a>
+        </aside>
+    </section>
+    {% endfor %}
+</div>
+{% endblock %}
