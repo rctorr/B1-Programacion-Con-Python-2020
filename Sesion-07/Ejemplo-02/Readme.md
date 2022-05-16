@@ -1,5 +1,5 @@
 
-## Rutas y parámetros
+## Rutas y plantillas (templates)
 
 ### OBJETIVO
 
@@ -13,26 +13,43 @@
 
 #### DESARROLLO
 
-**PARÁMETROS**
+**Plantillas (templates)**
 
-Además de tener múltiples rutas es posible crear páginas que acepten argumentos por medio de la URL, por ejmplo:
+Generar el código HTML de forma directa no es lo ideal, si no que hacemos uso del sistema de plantillas (templates) que proporcionan los distintos framewroks, en éste caso **Flask**, así que continuando con el caso del Ejemplo-01, vamos a hacer que la ruta `/acerca-de` muestre el contenido del archivo `public_html/acerca-de.html`, para ello tenemos que relacionar los siguientes tres componentes:
 
-- http://127.0.0.01:5000/hola/pluto/
+1. Ruta o url `/acerca-de`
+2. Función encargada de procesar la vista: `acerca_de()`
+3. Plantilla encargada de generar el HTML final: `templates/acerca-de.html`
 
-Genera la página que dirá:
-
-`Hola Pluto como estás!`
-
-- http://127.0.0.01:5000/hola/rctorr/
-
-Genera la página que dirá:
-
-`Hola Rctorr como estás!`
-
-Para eso al momento de crear una ruta se define una variable y el tipo de dato que uno espera, vamos a agregar el siguiente código a programa de `mi-app.py`
+Agreguemos el siguiente código al script `hola-flask.py`
 
 ```
-@app.route('/hola/<str:nombre>/')
-def hola(nombre):
-    return f"<h1>Hola {nombre} como estás!</h1>"
+@app.route('/acerca-de')
+def acerca_de():
+    return render_template('acerca-de.html')
 ```
+
+Y copia el archivo `public_html/acerca-de.html` a la carpeta `templates`, tu archivos deberían de estar algo similar a lo siguiente:
+
+```
+Ejemplo-02
+├── hola-flask.py
+├── public_html
+│   ├── acerca-de.html
+│   └── index.html
+├── Readme.md
+└── templates
+    ├── acerca-de.html
+    └── readme.md
+```
+
+Finalmente actualiza el código HTML de la función `index()` para que las etiquetas `<a href="...">` apunten a las rutas, no a los archivos html.
+
+Recuerda remplaza:
+
+1. `index.html` por `/`
+2. `acerca-de.html` por `/acerca-de`
+
+También tienes que realizar el cambio en el archivo `templates/acerca-de.html`
+
+Listo, ahora ya puedes navega entre las distintas páginas de tu primer aplicación web.

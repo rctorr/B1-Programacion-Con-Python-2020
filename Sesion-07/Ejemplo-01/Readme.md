@@ -103,17 +103,4 @@ En el cual nos indica que para ver la página en ejecución debemos ir a: http:/
 
 Si en lugar de ver sólo un texto simple queremos ver una página entonces abre el contenido del archivo `public_html/index.html` y pégalo como resultado de la función `index()` y observa el resultado.
 
-Generar el código HTML de forma directa no es lo ideal, si no que hacemos uso del sistema de plantillas (templates) que proporcionan los distintos framewroks, en éste caso Flask, así que anora vamos a hacer que la ruta `/acerca-de` muestre el contenido del archivo `public_html/acerca-de.html`, agrega el siguiente código a tu script:
-
-```
-@app.route('/acerca-de')
-def acerca_de():
-    return render_template('acerca-de.html')
-
-```
-
-Recuerda que por default flask busca que el archivo acerca-de.html en la carpeta `templates/`.
-
-Ahora navega entre las distintas páginas de tu primera aplicación web.
-
 

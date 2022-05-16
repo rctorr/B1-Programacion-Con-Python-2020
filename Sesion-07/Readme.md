@@ -6,30 +6,17 @@
 
 ## 📂 Organización de la clase
 
-- Introducción a Flask
+- Introducción a Flask, rutas y hola mundo en Flask
 
 	- [Ejemplo 01](Ejemplo-01)
-	- [Reto 01](Reto-01)
 
-- Jinja y css en templates
+- Rutas y plantillas (templates)
 
 	- [Ejemplo 02](Ejemplo-02)
-	- [Reto 01](Reto-01)
 
-
-- Rutas y parámetros
+- Rutas, plantillas y parámetros GET
 
 	- [Ejemplo 03](Ejemplo-03)
-	- [Reto 01](Reto-01)
+	- [Reto 03](Reto-03)
 
-
-- Rutas avanzadas
-
-	- [Ejemplo 04](Ejemplo-04)
-	- [Reto 02](Reto-02)
-
-
-- Formularios
-
-	- [Ejemplo 05](Ejemplo-05)
 

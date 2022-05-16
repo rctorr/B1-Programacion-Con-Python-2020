@@ -1,5 +1,5 @@
 
-## Formularios
+## Rutas, plantillas y parámetros GET
 
 ### OBJETIVO
 
@@ -12,35 +12,51 @@
 
 #### DESARROLLO
 
-Cuando una página contiene un formulario, éste se muestra como cualquier otra página y se usa el método o acción de tipo `GET`, éste es el método que usa un navegador cuando cuando solicita cualquier página, mientras no se indique un método diferente.
+Además de tener múltiples rutas es posible crear páginas que acepten argumentos por medio de la URL, para esto podemos utilizar el método `request`, recuerda importarlo desde el módulo `flask`.
 
-Entonces, nuevamente, la página de un formulario se solicita usando el método `GET` y en el navegador aparecerán los campos a llenar y generalmente un botón.
+Entonces vamos a agregar una nueva página a nuestra webapp llamada **Saludos** con los siguientes elementos:
 
-Cuando uno termina de llenar un formulario uno preciona normalmente el botón de **Enviar** entonces el navegador genera una petición al servidor, pero esta vez incluye los datos capturados y además el método ahora es **POST**.
+1. Ruta: `/saludos`
+2. Función: `saludos()`
+3. Plantilla: `saludos.html`
 
-En Flask para indicar que métodos son permitidos por una ruta, se realiza con el decorador `route()` como se muestra en el código más adelante.
+Y la página tiene que imprimir en el navegador unos saludos dependiendo del valor de la variable `nombre` parada en la dirección url, por ejemplo:
 
-Adicionalmente se tiene que hacer uso de un objeto de Flask llamado `request` (petición) que es una variable que almacena los datos capturador por el formulario, el método usado y otras muchas variables más, pero usando esta variable para obtener los datos del formulario se realiza con:
+- url: http://127.0.0.1:5000/saludos, imprime: ¡Hola Humano, te invito una birria!
+- url: http://127.0.0.1:5000/saludos?nombre=rctorr, imprime: ¡Hola Rctorr, te invito una birria!
+- url: http://127.0.0.1:5000/saludos?nombre=Tony, imprime: ¡Hola Tony, te invito una birria!
 
-`request.form["name del campo"]`
+![Página saludos personalizados](media/saludos-personalizados.png)
 
-Entonces es necesario agregar una nueva ruta y función a nuestra `mi-app.py` para que pueda atender las peticiones de la página de Contacto, notar que también se necesita del archivo `templates/contacto.html` que contiene el código HTML correspondiente.
-
+El código sería como el siguiente:
 
 ```
-@app.route('/contacto/', methods = ['GET', 'POST'])
-def contacto():
-    titulo = "Página de Contacto"
-    if request.method == 'POST':
-        nombre = request.form["nombre"]
-        email = request.form["email"]
-        comentarios = request.form["comentarios"]
-        
-        print("Los datos recibidos del formulario son:")
-        print(f"Nombre: {nombre}")
-        print(f"E-mail: {email}")
-        print(f"Comentarios: {comentarios}")
-        return index()
-
-    return render_template('contacto.html', titulo = titulo)
+@app.route('/saludos')
+def saludos():
+    nombre_get = request.args.get('nombre', 'Humano')
+    return render_template("saludos.html", nombre=nombre_get)
 ```
+
+Ahora también hay que copiar el archivo `public_html/saludos.html` a `templates/saludos.html`, modificar las direcciones de las etiquetas `<a href="...">` y además vamos a hacer uso de Jinja 2 que es un motor de plantillas para Python (y el que usa Django), lo que permite al desarrollador hacer frontend o crear código HTML de forma programática.
+
+Jinja nos permite usar bloques para usar código Seudo-Python de la siguiente forma:
+
+```
+{% código ej: for, if, etc %}
+
+{% endif, endfor, etc %}
+```
+
+O para acceder al contenido de variables se usa la forma corta: `{{ variable }}` muy similar a lo usados en las f-string, de tal forma que las llaves y el nombre de la variable serán remplazadas por el valor de la variable.
+
+Entonces modificamos el archivo `templates/saludos.html` para incluir el valor de la variable `nombre` que es pasada por la función `render_template()` a la plantilla.
+
+```
+    <h2>Saludos personalizados</h2>
+    <p>Hola {{ nombre }} te invito una birria!</p>
+```
+
+Ahora si modifica la url como se mencionó antes y observa los resultados.
+
+Esto es código HTML generado dinámicamente como resultado de un valor proporcionado por el usuario.
+
