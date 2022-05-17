@@ -1,13 +1,8 @@
 from compras import Lista_de_compra
 import pytest
 
-
-
-def setup_module(module):
-    global supermercado, electronicos
-    supermercado = Lista_de_compra('Jamon', 'Queso', 'Pan')
-    electronicos = Lista_de_compra('computadora')
-
+supermercado = Lista_de_compra('Jamon', 'Queso', 'Pan')
+electronicos = Lista_de_compra('computadora')
 
 
 def test_init():

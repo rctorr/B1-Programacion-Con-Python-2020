@@ -1,9 +1,8 @@
-
-## Parametrización de tests
+## Tests sobre clases y sus métodos
 
 ### OBJETIVO
 
-- Se utilizarán distintas opciones para filtrar que funciones test se ejecutaran
+- Crear test para clases y métodos
 
 #### REQUISITOS
 
@@ -12,184 +11,112 @@
 
 #### DESARROLLO
 
-Además de ejecutar de forma directa una función test, podemos usar -k para filtrar los test por nombre, por ejemplo podemos ejecutar los test que incluyen suma.
+Hasta el momento hemos visto ejemplos de test unicamente con funciones, pero cuando trabajamos usando el paradigma orientado a objetos también se puede realizar tests unitarios, en estos casos la unidad básica a testear son los métodos de clase y se realiza de una manera similar a cuando se pruebas funciones.
 
+Por ejemplo, si tenemos la siguiente definición de clase en `estudiante.py`:
 ```
-$pytest -k "suma" -v
-======================================================================================== test session starts ========================================================================================
-platform linux -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /home/luisams/anaconda3/bin/python
-cachedir: .pytest_cache
-hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('/home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03/.hypothesis/examples')
-rootdir: /home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
-plugins: doctestplus-0.5.0, arraydiff-0.3, astropy-header-0.1.2, hypothesis-5.5.4, remotedata-0.3.2, openfiles-0.4.0
-collected 4 items / 2 deselected / 2 selected                                                                                                                                                       
+import json
 
-test_operaciones.py::test_suma PASSED                                                                                                                                                         [ 50%]
-test_operaciones.py::test_suma_string PASSED                                                                                                                                                  [100%]
+class EstudianteDB:
+    def __init__(self):
+        self.__data = None
 
-================================================================================== 2 passed, 2 deselected in 0.02s ==================================================================================
-```
-De forma similar podemos usar and y or para manipular nuestos filtros
+    def connect(self, data_file):
+        with open(data_file) as json_file:
+            self.__data = json.load(json_file)
 
-```
-$pytest -k "suma or string" -v
-======================================================================================== test session starts ========================================================================================
-platform linux -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /home/luisams/anaconda3/bin/python
-cachedir: .pytest_cache
-hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('/home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03/.hypothesis/examples')
-rootdir: /home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
-plugins: doctestplus-0.5.0, arraydiff-0.3, astropy-header-0.1.2, hypothesis-5.5.4, remotedata-0.3.2, openfiles-0.4.0
-collected 4 items / 1 deselected / 3 selected                                                                                                                                                       
-
-test_operaciones.py::test_suma PASSED                                                                                                                                                         [ 33%]
-test_operaciones.py::test_suma_string PASSED                                                                                                                                                  [ 66%]
-test_operaciones.py::test_producto_string PASSED                                                                                                                                              [100%]
-
-================================================================================== 3 passed, 1 deselected in 0.02s ==================================================================================
+    def get_data(self,nombre):
+        for estudiante in self.__data['estudiantes']:
+            if estudiante ['nombre'] == nombre:
+                return estudiante
 ```
 
-Al importar el módulo pytest en nuestro código podemos utilizar el decorador mark para crear una marca que nos permita filtrar posteriormente nuestros tests
+La cual tiene métodos para conectarse a una base de datos json de estudiantes y devolver datos, si tenemos el siguiente json de prueba
 
 ```
-import operaciones
-import pytest
-
-@pytest.mark.numero
-def test_suma():
-    assert operaciones.suma(2,3) ==5
-    assert operaciones.suma(2)==2
-
-@pytest.mark.numero
-def test_producto():
-    assert operaciones.producto(3,5) == 15
-    assert operaciones.producto(2) == 2
-
-@pytest.mark.texto
-def test_suma_string():
-    resultado = operaciones.suma('Hola ', 'Mundo')
-    assert resultado == 'Hola Mundo'
-    assert type(resultado) is str
-    assert len(resultado) > 0
-
-@pytest.mark.texto
-def test_producto_string():
-    resultado = operaciones.producto('Hola ', 3)
-    assert resultado == 'Hola Hola Hola '
+{
+    "estudiantes": [
+        {
+            "id": 1,
+            "nombre": "Mario",
+            "resultado": "aprobado"
+        },
+        {
+            "id": 2,
+            "nombre": "Luigi",
+            "resultado": "reprobado"
+        }
+    ]
+}
 ```
 
-Para filtrar usando marks, podemos utilizar -m
-```
-pytest -m numero -v
-======================================================================================== test session starts ========================================================================================
-platform linux -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /home/luisams/anaconda3/bin/python
-cachedir: .pytest_cache
-hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('/home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03/.hypothesis/examples')
-rootdir: /home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
-plugins: doctestplus-0.5.0, arraydiff-0.3, astropy-header-0.1.2, hypothesis-5.5.4, remotedata-0.3.2, openfiles-0.4.0
-collected 4 items / 2 deselected / 2 selected                                                                                                                                                       
-
-test_operaciones.py::test_suma PASSED                                                                                                                                                         [ 50%]
-test_operaciones.py::test_producto PASSED   
-```
-Generalmente, se ejecutaran todos los tests sin importar si alguno resulta en un error, pero en caso de que queramos que al momento de fallar uno de los tests la prueba se detenga, podemos usar -x
-
-En el siguiente ejemplo modificamos el programa para que falle en el segundo test.
-
-Si no usamos -x obtenemos:
-```
-$pytest -v 
-======================================================================================== test session starts ========================================================================================
-platform linux -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /home/luisams/anaconda3/bin/python
-cachedir: .pytest_cache
-hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('/home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03/.hypothesis/examples')
-rootdir: /home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
-plugins: doctestplus-0.5.0, arraydiff-0.3, astropy-header-0.1.2, hypothesis-5.5.4, remotedata-0.3.2, openfiles-0.4.0
-collected 4 items                                                                                                                                                                                   
-
-test_operaciones.py::test_suma PASSED                                                                                                                                                         [ 25%]
-test_operaciones.py::test_producto FAILED                                                                                                                                                     [ 50%]
-test_operaciones.py::test_suma_string PASSED                                                                                                                                                  [ 75%]
-test_operaciones.py::test_producto_string PASSED                                                                                                                                              [100%]
-
-============================================================================================= FAILURES ==============================================================================================
-___________________________________________________________________________________________ test_producto ___________________________________________________________________________________________
-
-    @pytest.mark.numero
-    def test_producto():
->       assert operaciones.producto(3,5) == 16
-E       assert 15 == 16
-E         -15
-E         +16
-
-test_operaciones.py:11: AssertionError
-```
-Al contrario, usar -x nos permite hacer que la ejecución de los tests se detenga al fallar uno.
+Podemos crear el script `test_estudiante.py` para el método `get_data()`:
 
 ```
-pytest -v -x
-======================================================================================== test session starts ========================================================================================
-platform linux -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /home/luisams/anaconda3/bin/python
-cachedir: .pytest_cache
-hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('/home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03/.hypothesis/examples')
-rootdir: /home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
-plugins: doctestplus-0.5.0, arraydiff-0.3, astropy-header-0.1.2, hypothesis-5.5.4, remotedata-0.3.2, openfiles-0.4.0
-collected 4 items                                                                                                                                                                                   
+import estudiante
 
-test_operaciones.py::test_suma PASSED                                                                                                                                                         [ 25%]
-test_operaciones.py::test_producto FAILED                                                                                                                                                     [ 50%]
+db = estudiante.EstudianteDB()
+db.connect('data.json')
 
-============================================================================================= FAILURES ==============================================================================================
-___________________________________________________________________________________________ test_producto ___________________________________________________________________________________________
+def test_datos_luigi():
+    luigi = db.get_data('Luigi')
+    assert luigi['id'] == 2
+    assert luigi['nombre'] == 'Luigi'
+    assert luigi['resultado'] == 'reprobado'
 
-    @pytest.mark.numero
-    def test_producto():
->       assert operaciones.producto(3,5) == 16
-E       assert 15 == 16
-E         -15
-E         +16
-
-test_operaciones.py:11: AssertionError
+def test_datos_mario():
+    mario = db.get_data('Mario')
+    assert mario['id'] == 1
+    assert mario['nombre'] == 'Mario'
+    assert mario['resultado'] == 'aprobado'
 ```
-De froma similar podemos utilizar --maxfail para colocar un límite de test fallados antes de abortar la ejecución
+
+Al ejecutar las pruebas observamos:
 
 ```
-$pytest -v --maxfail=2
-```
-Otra forma de saltar un test, por ejemplo en el caso de que aún se encuentre en desarrollo, es usar la marca skip. Por ejemplo
-```
-@pytest.mark.skip(reason="no ejecutes este test")
-def test_suma_string():
-    resultado = operaciones.suma('Hola ', 'Mundo')
-    assert resultado == 'Hola Mundo'
-    assert type(resultado) is str
-    assert len(resultado) > 0
-```
-```
-ytest test_operaciones_salta.py 
-======================================================================================== test session starts ========================================================================================
-platform linux -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1
-rootdir: /home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
-plugins: doctestplus-0.5.0, arraydiff-0.3, astropy-header-0.1.2, hypothesis-5.5.4, remotedata-0.3.2, openfiles-0.4.0
-collected 4 items                                                                                                                                                                                   
+Sesion-08/Ejemplo-03 $ pytest 
+============== test session starts ==============
+platform linux -- Python 3.10.4, pytest-7.1.2, pluggy-1.0.0
+rootdir: /mint/home/rctorr/Cursos/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
+collected 2 items                               
 
-test_operaciones_salta.py ..s.                                                                                                                                                                [100%]
+test_estudiante.py FF                     [100%]
 
-=================================================================================== 3 passed, 1 skipped in 0.03s ====================================================================================
-(base) luisams@luisams-Inspiron-3459:~/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03$ pytest test_operaciones_salta.py -v
-======================================================================================== test session starts ========================================================================================
-platform linux -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /home/luisams/anaconda3/bin/python
-cachedir: .pytest_cache
-hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase('/home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03/.hypothesis/examples')
-rootdir: /home/luisams/Documentos/bedu/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
-plugins: doctestplus-0.5.0, arraydiff-0.3, astropy-header-0.1.2, hypothesis-5.5.4, remotedata-0.3.2, openfiles-0.4.0
-collected 4 items                                                                                                                                                                                   
+=================== FAILURES ====================
+_______________ test_datos_luigi ________________
 
-test_operaciones_salta.py::test_suma PASSED                                                                                                                                                   [ 25%]
-test_operaciones_salta.py::test_producto PASSED                                                                                                                                               [ 50%]
-test_operaciones_salta.py::test_suma_string SKIPPED                                                                                                                                           [ 75%]
-test_operaciones_salta.py::test_producto_string PASSED                                                                                                                                        [100%]
+    def test_datos_luigi():
+        luigi = db.get_data('Luigi')
+>       assert luigi['id'] == 2
+E       TypeError: string indices must be integers
 
-=================================================================================== 3 passed, 1 skipped in 0.02s ====================================================================================
+test_estudiante.py:8: TypeError
+_______________ test_datos_mario ________________
+
+    def test_datos_mario():
+        mario = db.get_data('Mario')
+>       assert mario['id'] == 1
+E       TypeError: string indices must be integers
+
+test_estudiante.py:14: TypeError
+============ short test summary info ============
+FAILED test_estudiante.py::test_datos_luigi - ...
+FAILED test_estudiante.py::test_datos_mario - ...
+=============== 2 failed in 0.03s ===============
+Sesion-08/Ejemplo-03 $ 
 ```
-De forma similar si se requiere saltar un test bajo una condición, se puede usar la marca skipif(condicion) para decorar el test
 
+Que indica que ambas pruebas no han pasado, así que entonces hay que revisar nuestro código, corregirlo y ejecutar nuevamente las pruebas, éste proceso se repite hasta que todas las pruebas pasen, entonces podemos entregar nuestro código.
+
+```
+Sesion-08/Ejemplo-03 $ pytest 
+============== test session starts ==============
+platform linux -- Python 3.10.4, pytest-7.1.2, pluggy-1.0.0
+rootdir: /mint/home/rctorr/Cursos/B1-Programacion-Con-Python-2020/Sesion-08/Ejemplo-03
+collected 2 items                               
+
+test_estudiante.py ..                     [100%]
+
+=============== 2 passed in 0.01s ===============
+Sesion-08/Ejemplo-03 $ 
+```
